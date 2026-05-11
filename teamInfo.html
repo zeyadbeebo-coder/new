@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NileMarket-Our Team</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css files/shared.css" />
+    <style>
+      .hero {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.4rem;
+        color: var(--accent);
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .pitch-wrapper {
+        position: relative;
+        max-width: 1050px;
+        margin: 0 auto;
+        border-radius: 24px;
+        overflow: visible;
+      }
+
+      .pitch-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .pitch-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .team-elements {
+        position: relative;
+        z-index: 1;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .formation-row {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      .player {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--accent);
+        line-height: 1.2;
+        text-align: center;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+
+      .player:hover .avatar {
+        border-color: var(--accent);
+        transform: scale(1.1);
+      }
+
+      .department {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 2px 10px;
+        white-space: nowrap;
+      }
+
+      .department.leader {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      .hover-card {
+        position: absolute;
+        bottom: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%) scale(0.95);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        width: 260px;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+        z-index: 10;
+        text-align: left;
+      }
+
+      .player:hover .hover-card {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+
+      .hover-card .member-name {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .hover-card .student-id {
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .hover-card .divider {
+        height: 1px;
+        background: var(--border);
+        margin-bottom: 10px;
+      }
+
+      .hover-card .member-desc {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toppage"></div>
+    <div class="hero">
+      <h1>Meet the players behind building up this website</h1>
+      <p>The people who worked hard for days to bring this website to life.</p>
+    </div>
+
+    <div class="pitch-wrapper">
+      <div class="pitch-bg">
+        <img src="../court.jpeg" />
+      </div>
+
+      <div class="team-elements">
+        <div class="formation-row">
+          <div class="player">
+            <div class="avatar">EL-<br />Zoz</div>
+            <span class="department leader">CF · Team Leader</span>
+            <div class="hover-card">
+              <div class="member-name">Ziad Hany Ibrahim</div>
+              <div class="student-id">#20250429</div>
+              <div class="divider"></div>
+              <p class="member-desc">
+                Led the team and built index.html and pages, and connected all
+                pages together, and reviewed every page.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="formation-row">
+          <div class="player">
+            <div class="avatar">RH</div>
+            <span class="department">AMF · Developer</span>
+            <div class="hover-card">
+              <div class="member-name">Retaj Huessien</div>
+              <div class="student-id">#20250389</div>
+              <div class="divider"></div>
+              <p class="member-desc">
+                Collected data for the products and built the products.html with
+                Haneen.
+              </p>
+            </div>
+          </div>
+
+          <div class="player">
+            <div class="avatar">HN</div>
+            <span class="department">AMF · Developer</span>
+            <div class="hover-card">
+              <div class="member-name">Haneen Nasser Kamel</div>
+              <div class="student-id">#20250330</div>
+              <div class="divider"></div>
+              <p class="member-desc">
+                Also collected data for the products and built the products.html
+                with Retaj.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="formation-row">
+          <div class="player">
+            <div class="avatar">ZM</div>
+            <span class="department">CB · Developer</span>
+            <div class="hover-card">
+              <div class="member-name">Ziad Mohamed Bahaa</div>
+              <div class="student-id">#20250423</div>
+              <div class="divider"></div>
+              <p class="member-desc">
+                Built login.html, reviewed register.html, checkout.html,
+                cart.html, and the external css and js files.
+              </p>
+            </div>
+          </div>
+
+          <div class="player">
+            <div class="avatar">ZA</div>
+            <span class="department">CB · Developer</span>
+            <div class="hover-card">
+              <div class="member-name">Ziad Amr Mohamed</div>
+              <div class="student-id">#20250419</div>
+              <div class="divider"></div>
+              <p class="member-desc">
+                Built cart.html and connected it to products.html.
+              </p>
+            </div>
+          </div>
+
+          <div class="player">
+            <div class="avatar">ZH</div>
+            <span class="department">CB · Developer</span>
+            <div class="hover-card">
+              <div class="member-name">Ziad Haitham Abdul Monem Amen</div>
+              <div class="student-id">#20250434</div>
+              <div class="divider"></div>
+              <p class="member-desc">Built contact-us.html.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="formation-row">
+          <div class="player">
+            <div class="avatar">MS</div>
+            <span class="department">GK · Developer</span>
+            <div class="hover-card">
+              <div class="member-name">Mohamed Sherif Mohamed Hosny</div>
+              <div class="student-id">#20250885</div>
+              <div class="divider"></div>
+              <p class="member-desc">
+                Built the register.html and connected it to login.html.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer></footer>
+
+    <script src="../js file/shared.js"></script>
+  </body>
+</html>

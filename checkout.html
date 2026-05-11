@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NileMarket — Checkout</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css files/shared.css" />
+    <style>
+      main {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .checkout-box {
+        width: 100%;
+        max-width: 450px;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      .form-details {
+        margin-bottom: 1.2rem;
+      }
+
+      #pinSection {
+        display: none;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toppage"></div>
+    <main>
+      <div class="checkout-box RLC-board">
+        <h2>Checkout</h2>
+
+        <form id="checkoutForm">
+          <div class="form-details">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" required />
+            <p class="error-msg" id="nameError">Please Enter Your Full Name</p>
+          </div>
+
+          <div class="form-details">
+            <label for="address">Address</label>
+            <input type="text" id="address" required />
+            <p class="error-msg" id="addressError">Address Is Required</p>
+          </div>
+
+          <div class="form-details">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required />
+            <p class="error-msg" id="phoneError">
+              Enter Your 11 Digit Phone Number
+            </p>
+          </div>
+
+          <button type="button" class="RLCbtn" onclick="validateAndShowPin()">
+            Place Order
+          </button>
+
+          <div id="pinSection">
+            <label for="pin">Enter 4 Digit Security PIN</label>
+            <input type="password" id="pin" maxlength="4" placeholder="****" />
+            <p class="error-msg" id="pinError">Wrong PIN. Must be 4 digits.</p>
+
+            <button
+              type="button"
+              class="RLCbtn"
+              style="margin-top: 10px"
+              onclick="finalSubmit()"
+            >
+              Confirm Payment
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="../js file/shared.js"></script>
+    <script>
+      function validateAndShowPin() {
+        const name = document.getElementById("fullName").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+
+        let isValid = true;
+
+        if (name.length < 2) {
+          document.getElementById("nameError").style.display = "block";
+          isValid = false;
+        } else {
+          document.getElementById("nameError").style.display = "none";
+        }
+
+        if (address.length < 5) {
+          document.getElementById("addressError").style.display = "block";
+          isValid = false;
+        } else {
+          document.getElementById("addressError").style.display = "none";
+        }
+
+        if (!/^\d{11}$/.test(phone)) {
+          document.getElementById("phoneError").style.display = "block";
+          isValid = false;
+        } else {
+          document.getElementById("phoneError").style.display = "none";
+        }
+
+        if (isValid) {
+          document.getElementById("pinSection").style.display = "block";
+        }
+      }
+
+      function finalSubmit() {
+        const pin = document.getElementById("pin").value.trim();
+
+        if (/^\d{4}$/.test(pin)) {
+          alert("Order Placed Successfully!");
+          window.location.href = "index.html";
+        } else {
+          document.getElementById("pinError").style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>

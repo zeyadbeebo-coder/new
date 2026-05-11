@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NileMarket — Register</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css files/shared.css" />
+    <style>
+      body {
+        background-image:
+          radial-gradient(
+            ellipse at 80% 50%,
+            rgba(200, 151, 58, 0.06) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 20% 80%,
+            rgba(200, 151, 58, 0.04) 0%,
+            transparent 50%
+          );
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+
+      .register-box {
+        max-width: 420px;
+      }
+
+      #pass-strength {
+        height: 4px;
+        background: var(--border);
+        border-radius: 4px;
+        margin-top: -10px;
+        margin-bottom: 14px;
+        overflow: hidden;
+      }
+
+      #strength-bar {
+        height: 100%;
+        width: 0%;
+        border-radius: 4px;
+        transition:
+          width 0.3s,
+          background 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toppage"></div>
+    <main>
+      <header class="header">
+        <h1>NileMarket</h1>
+        <h2>Create your account to start shopping</h2>
+      </header>
+
+      <section class="register-box RLC-board">
+        <form id="registration">
+          <label for="name">Full Name</label>
+          <input
+            id="name"
+            type="text"
+            placeholder="John Doe"
+            autocomplete="name"
+          />
+
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="At least 6 characters"
+            autocomplete="new-password"
+          />
+          <div id="pass-strength"><div id="strength-bar"></div></div>
+
+          <label for="confirm">Confirm Password</label>
+          <input
+            id="confirm"
+            type="password"
+            placeholder="Repeat your password"
+            autocomplete="new-password"
+          />
+
+          <p id="msg" class="Error-msg"></p>
+
+          <button type="submit" id="register-btn" class="RLCbtn">
+            Create Account
+          </button>
+
+          <p class="RL-link">
+            Already have an account?
+            <a href="login.html" target="_blank">Sign in</a>
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 NileMarket — All rights reserved</p>
+    </footer>
+
+    <script src="../js file/shared.js"></script>
+    <script>
+      document
+        .getElementById("password")
+        .addEventListener("input", function () {
+          var val = this.value;
+          var bar = document.getElementById("strength-bar");
+          var strength = 0;
+
+          if (val.length >= 6) strength++;
+          if (val.length >= 10) strength++;
+          if (/[A-Z]/.test(val)) strength++;
+          if (/[0-9]/.test(val)) strength++;
+          if (/[^A-Za-z0-9]/.test(val)) strength++;
+
+          var colors = ["#e05252", "#e07d52", "#e0c352", "#4caf7d", "#2e9e60"];
+          var widths = ["20%", "40%", "60%", "80%", "100%"];
+
+          bar.style.width =
+            val.length === 0 ? "0%" : widths[Math.min(strength - 1, 4)];
+          bar.style.background =
+            val.length === 0 ? "" : colors[Math.min(strength - 1, 4)];
+        });
+
+      document
+        .getElementById("registration")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          var msgEl = document.getElementById("msg");
+          var name = document.getElementById("name").value.trim();
+          var email = document.getElementById("email").value.trim();
+          var password = document.getElementById("password").value;
+          var confirm = document.getElementById("confirm").value;
+
+          msgEl.className = "Error-msg";
+          msgEl.textContent = "";
+
+          if (
+            name === "" ||
+            email === "" ||
+            password === "" ||
+            confirm === ""
+          ) {
+            msgEl.className = "Error-msg error";
+            msgEl.textContent = "Please fill in all fields.";
+            return;
+          }
+
+          if (password.length < 6) {
+            msgEl.className = "Error-msg error";
+            msgEl.textContent = "Password must be at least 6 characters.";
+            return;
+          }
+
+          if (password !== confirm) {
+            msgEl.className = "Error-msg error";
+            msgEl.textContent = "Passwords do not match.";
+            return;
+          }
+
+          var users = JSON.parse(localStorage.getItem("users") || "[]");
+          var exists = users.find(function (u) {
+            return u.email === email;
+          });
+
+          if (exists) {
+            msgEl.className = "Error-msg error";
+            msgEl.textContent = "An account with this email already exists.";
+            return;
+          }
+
+          var newUser = { name: name, email: email, password: password };
+          users.push(newUser);
+          localStorage.setItem("users", JSON.stringify(users));
+          localStorage.setItem("currentUser", JSON.stringify(newUser));
+
+          msgEl.className = "Error-msg success";
+          msgEl.textContent = "Account created! Redirecting...";
+
+          setTimeout(function () {
+            window.open("index.html", "_blank");
+          }, 1000);
+        });
+    </script>
+  </body>
+</html>

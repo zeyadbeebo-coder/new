@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NileMarket — Login</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css files/shared.css" />
+    <style>
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 20px 40px;
+      }
+
+      .login-box {
+        max-width: 420px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toppage"></div>
+    <main>
+      <header class="header">
+        <h1>NileMarket</h1>
+        <h2>Welcome back — sign in to continue</h2>
+      </header>
+
+      <section class="login-box RLC-board">
+        <form id="loginForm">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+
+          <p id="error-msg" class="Error-msg"></p>
+
+          <button type="button" id="loginbtn" class="RLCbtn">Sign In</button>
+
+          <p class="RL-link">
+            Don't have an account?
+            <a href="register.html" target="_blank">Sign up now!</a>
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 NileMarket — All rights reserved</p>
+    </footer>
+
+    <script src="../js file/shared.js"></script>
+    <script>
+      const loginBtn = document.getElementById("loginbtn");
+      const form = document.getElementById("loginForm");
+
+      loginBtn.addEventListener("click", function () {
+        const error = document.getElementById("error-msg");
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        error.textContent = "";
+        error.className = "Error-msg";
+
+        if (email === "" || password === "") {
+          error.textContent = "Please fill in all fields.";
+          error.classList.add("error");
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+        const foundUser = users.find(function (u) {
+          return u.email === email && u.password === password;
+        });
+
+        if (foundUser) {
+          localStorage.setItem("currentUser", JSON.stringify(foundUser));
+          window.location.href = "index.html";
+        } else {
+          error.textContent = "Incorrect email or password. Please try again.";
+          error.classList.add("error");
+        }
+      });
+
+      form.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") loginBtn.click();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,278 @@
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --border: #e8e0d4;
+  --accent: #b8832a;
+  --accent-hover: #c8973a;
+  --text: #1a1410;
+  --muted: #8a7d6b;
+  --error: #c0392b;
+  --success: #2e7d32;
+  --input-bg: #f5f0e8;
+  --footer: #b8a990;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  --btn-text: #fff;
+  --toggle-bg: #e8e0d4;
+  --toggle-icon-x: 2px;
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f0f;
+  --surface: #1a1a1a;
+  --border: #2e2e2e;
+  --accent: #c8973a;
+  --accent-hover: #e0ab4a;
+  --text: #f0ece4;
+  --muted: #888;
+  --error: #e05252;
+  --success: #4caf7d;
+  --input-bg: #111;
+  --footer: #444;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  --btn-text: #0f0f0f;
+  --toggle-bg: #2e2e2e;
+  --toggle-icon-x: 26px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.toppage {
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px 24px;
+}
+
+.theme1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme1 span {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.t {
+  width: 46px;
+  height: 24px;
+  background: var(--toggle-bg);
+  border-radius: 12px;
+  position: relative;
+  transition: background 0.3s;
+  border: 1px solid var(--border);
+}
+
+.atheme {
+  position: absolute;
+  top: 2px;
+  left: var(--toggle-icon-x);
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border-radius: 50%;
+  transition:
+    left 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.4rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+
+header h2 {
+  font-size: xx-large;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+  transition: color 0.3s;
+}
+nav ul li a {
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+  transition: color 0.3s;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+  transition:
+    border-color 0.2s,
+    background 0.3s,
+    color 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+input::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.error-msg {
+  color: var(--error);
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.RLCbtn {
+  width: 100%;
+  padding: 13px;
+  background: var(--accent);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  margin-bottom: 18px;
+  transition:
+    background 0.2s,
+    transform 0.15s,
+    color 0.3s;
+}
+
+.RLCbtn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.RLC-board {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  box-shadow: var(--shadow);
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.RL-link {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.RL-link a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.RL-link a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.Error-msg {
+  font-size: 0.85rem;
+  text-align: center;
+  margin-bottom: 10px;
+  min-height: 20px;
+}
+
+.Error-msg.error {
+  color: var(--error);
+}
+
+.Error-msg.success {
+  color: var(--success);
+}
+
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 0.8rem;
+  color: var(--footer);
+  transition: color 0.3s;
+}
+@media (max-width: 480px) {
+  .RLC-board {
+    padding: 28px 20px;
+    border: none;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+  #summary-box {
+    width: 100%;
+  }
+  header {
+    padding: 14px 16px;
+  }
+  #cart-table th,
+  #cart-table td {
+    padding: 10px;
+    font-size: 0.82rem;
+  }
+}

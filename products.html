@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <link rel="stylesheet" href="../css files/products.css" />
+    <link rel="stylesheet" href="../css files/shared.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <h1>NileMarket</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="teamInfo.html">About us</a></li>
+        </ul>
+      </nav>
+      <div class="btn">
+        <button><a href="login.html">LOGIN</a></button>
+      </div>
+    </header>
+    <input placeholder="SEARCH" type="text" class="search" id="SEARCH" />
+    <div class="cate">
+      <div>
+        <img
+          src="../categories of products/allcategorie.png"
+          alt="all"
+          id="all"
+          onclick="filterProducts('all')"
+        />
+      </div>
+      <div>
+        <img
+          src="../categories of products/Phones.avif"
+          alt="phones"
+          id="phone"
+          onclick="filterProducts('phone')"
+        />
+      </div>
+      <div>
+        <img
+          src="../categories of products/tablets.avif"
+          alt="tablets"
+          id="tablet"
+          onclick="filterProducts('Tablets')"
+        />
+      </div>
+      <div>
+        <img
+          src="../categories of products/wearables.avif"
+          alt="wearables"
+          id="wearables"
+          onclick="filterProducts('wearable')"
+        />
+      </div>
+      <div>
+        <img
+          src="../categories of products/accessories.avif"
+          alt="accessories"
+          id="accessories"
+          onclick="filterProducts('accessories')"
+        />
+      </div>
+      <div>
+        <img
+          src="../categories of products/headsets.avif"
+          alt="headsets"
+          id="headsets"
+          onclick="filterProducts('headset')"
+        />
+      </div>
+    </div>
+
+    <div class="content">
+      <section class="various-products" id="various-products"></section>
+    </div>
+    <script src="../js file/script.js"></script>
+    <script src="../js file/shared.js"></script>
+  </body>
+</html>

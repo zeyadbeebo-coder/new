@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NileMarket — My Cart</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css files/shared.css" />
+    <style>
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 32px;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+        transition:
+          background 0.3s,
+          border-color 0.3s;
+      }
+
+      #backbtn {
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          color 0.2s,
+          background 0.2s;
+      }
+
+      #backbtn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--input-bg);
+      }
+
+      #cart {
+        background: var(--accent);
+        padding: 18px 32px;
+        transition: background 0.3s;
+      }
+
+      #cart h2 {
+        font-family: "Playfair Display", serif;
+        color: #fff;
+        font-size: 1.4rem;
+        letter-spacing: 3px;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        gap: 28px;
+        align-items: flex-start;
+        padding: 32px;
+        max-width: 1100px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      #cart-data {
+        flex: 1;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition:
+          background 0.3s,
+          border-color 0.3s;
+      }
+
+      #cart-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      #cart-table thead tr {
+        background: var(--input-bg);
+        border-bottom: 2px solid var(--border);
+        transition: background 0.3s;
+      }
+
+      #cart-table th {
+        padding: 14px 18px;
+        text-align: left;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: color 0.3s;
+      }
+
+      #cart-table td {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.92rem;
+        color: var(--text);
+        transition:
+          color 0.3s,
+          border-color 0.3s;
+        vertical-align: middle;
+      }
+
+      #cart-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+      #cart-table tbody tr {
+        transition: background 0.15s;
+      }
+      #cart-table tbody tr:hover {
+        background: var(--input-bg);
+      }
+
+      .qty-ctrl {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .qty-ctrl button {
+        width: 28px;
+        height: 28px;
+        border: 1px solid var(--border);
+        background: var(--input-bg);
+        color: var(--text);
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+
+      .qty-ctrl button:hover {
+        border-color: var(--accent);
+        background: var(--surface);
+      }
+
+      .qty-val {
+        min-width: 24px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .remove-btn {
+        background: none;
+        border: 1px solid var(--error);
+        color: var(--error);
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .remove-btn:hover {
+        background: var(--error);
+        color: #fff;
+      }
+
+      tr.removing {
+        opacity: 0;
+        transform: translateX(20px);
+        transition:
+          opacity 0.28s ease,
+          transform 0.28s ease;
+      }
+
+      #empty-msg {
+        display: none;
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      #cart-icon {
+        font-size: 3.5rem;
+        margin-bottom: 16px;
+      }
+
+      #empty-msg h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+
+      #empty-msg p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 24px;
+      }
+
+      #shopbtn {
+        background: var(--accent);
+        color: var(--btn-text);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+
+      #shopbtn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+      }
+
+      #sum-box {
+        width: 300px;
+        flex-shrink: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+        transition:
+          background 0.3s,
+          border-color 0.3s;
+      }
+
+      #sum-box .sum-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 14px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--border);
+        transition:
+          color 0.3s,
+          border-color 0.3s;
+      }
+
+      #sum-box .sum-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 24px;
+        padding-top: 4px;
+        transition: color 0.3s;
+      }
+
+      #checkout-btn {
+        width: 100%;
+        padding: 14px;
+        background: var(--accent);
+        color: var(--btn-text);
+        border: none;
+        border-radius: 10px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.3px;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          color 0.3s;
+      }
+
+      #checkout-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+      }
+          footer video{
+        width: 300px;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toppage"></div>
+    <header>
+      <h1>NileMarket</h1>
+      <button id="backbtn" onclick="goBack()">← Continue Shopping</button>
+    </header>
+
+    <div id="cart">
+      <h2>MY CART</h2>
+    </div>
+
+    <main>
+      <div id="cart-data">
+        <table id="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody id="cart-body"></tbody>
+        </table>
+        <div id="empty-msg">
+          <div id="cart-icon">🛒</div>
+          <h3>Your cart is empty</h3>
+          <p>Looks like you haven't added anything yet.</p>
+          <button id="shopbtn" onclick="goBack()">Browse Products</button>
+        </div>
+      </div>
+
+      <div id="sum-box" style="display: none">
+        <div class="sum-row">
+          <span>Subtotal</span>
+          <span id="subtotal-val">$0.00</span>
+        </div>
+        <div class="sum-row">
+          <span>Shipping</span>
+          <span style="color: #2e7d32; font-weight: 600">FREE</span>
+        </div>
+        <div class="sum-total">
+          <span>GRAND TOTAL</span>
+          <span id="grand-total">$0.00</span>
+        </div>
+        <button id="checkout-btn" onclick="checkout()">
+          Proceed to Checkout →
+        </button>
+      </div>
+    </main>
+
+    <footer>
+         <video controls loop autoplay >
+      <source src="../vid.mp4" > 
+     </video>
+    </footer>
+
+    <script src="../js file/shared.js"></script>
+    <script>
+      function loadCart() {
+        try {
+          var saved = localStorage.getItem("MYCART");
+          if (saved) {
+            var memory = JSON.parse(saved);
+            if (Array.isArray(memory) && memory.length > 0) return memory;
+          }
+        } catch (e) {}
+        return [];
+      }
+
+      function saveCart(cart) {
+        try {
+          localStorage.setItem("MYCART", JSON.stringify(cart));
+        } catch (e) {}
+      }
+
+      var cart = loadCart();
+
+      function renderCart() {
+        var Tbody = document.getElementById("cart-body");
+        var EmptyMsg = document.getElementById("empty-msg");
+        var Tcart = document.getElementById("cart-table");
+        var summaryBox = document.getElementById("sum-box");
+        var subtotal = document.getElementById("subtotal-val");
+        var total = document.getElementById("grand-total");
+
+        Tbody.innerHTML = "";
+
+        if (cart.length === 0) {
+          EmptyMsg.style.display = "block";
+          Tcart.style.display = "none";
+          summaryBox.style.display = "none";
+          return;
+        }
+
+        EmptyMsg.style.display = "none";
+        Tcart.style.display = "table";
+        summaryBox.style.display = "block";
+
+        var grandTotal = 0;
+
+        for (var i = 0; i < cart.length; i++) {
+          (function (item, pos) {
+            var ItemTotal = item.price * item.qty;
+            grandTotal += ItemTotal;
+
+            var tr = document.createElement("tr");
+            tr.id = "row-" + pos;
+            tr.innerHTML =
+              "<td>" +
+              item.name +
+              "</td>" +
+              "<td>$" +
+              item.price.toFixed(2) +
+              "</td>" +
+              "<td><div class='qty-ctrl'>" +
+              "<button onclick='changeQty(" +
+              pos +
+              ", -1)'>−</button>" +
+              "<span class='qty-val'>" +
+              item.qty +
+              "</span>" +
+              "<button onclick='changeQty(" +
+              pos +
+              ", 1)'>+</button>" +
+              "</div></td>" +
+              "<td>$" +
+              ItemTotal.toFixed(2) +
+              "</td>" +
+              "<td><button class='remove-btn' onclick='removeItem(" +
+              pos +
+              ")'>Remove</button></td>";
+
+            Tbody.appendChild(tr);
+          })(cart[i], i);
+        }
+
+        subtotal.textContent = "$" + grandTotal.toFixed(2);
+        total.textContent = "$" + grandTotal.toFixed(2);
+      }
+
+      function changeQty(pos, sign) {
+        cart[pos].qty += sign;
+        if (cart[pos].qty < 1) cart[pos].qty = 1;
+        saveCart(cart);
+        renderCart();
+      }
+
+      function removeItem(pos) {
+        if (!confirm("Remove " + cart[pos].name + " from your cart?")) return;
+
+        var row = document.getElementById("row-" + pos);
+        if (row) {
+          row.classList.add("removing");
+          setTimeout(function () {
+            cart.splice(pos, 1);
+            saveCart(cart);
+            renderCart();
+          }, 280);
+        } else {
+          cart.splice(pos, 1);
+          saveCart(cart);
+          renderCart();
+        }
+      }
+
+      function goBack() {
+        window.open("products.html", "_blank");
+      }
+
+      function checkout() {
+        try {
+          localStorage.setItem("checkoutCart", JSON.stringify(cart));
+        } catch (e) {}
+        window.open("checkout.html", "_blank");
+      }
+
+      renderCart();
+    </script>
+  </body>
+</html>

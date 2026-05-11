@@ -1,0 +1,300 @@
+* {
+  margin: 0;
+}
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --border: #e8e0d4;
+  --accent: #b8832a;
+  --accent-hover: #c8973a;
+  --text: #1a1410;
+  --muted: #8a7d6b;
+  --error: #c0392b;
+  --success: #2e7d32;
+  --input-bg: #f5f0e8;
+  --footer: #b8a990;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  --btn-text: #fff;
+  --toggle-bg: #e8e0d4;
+  --toggle-icon-x: 2px;
+}
+body {
+  display: grid;
+  grid-template-rows: 70px 70px auto auto 60px;
+  min-height: 100%;
+  grid-template-columns: auto 100px 100px;
+  grid-template-areas: "header header header" "search search search" "hero hero hero" "sec sec sec" "foot foot foot";
+  background-color: var(--bg);
+}
+header {
+  grid-area: header;
+  display: grid;
+  grid-template-areas: "logo nav nav nav nav btn btn";
+  background-color: var(--surface);
+}
+header .logo {
+  grid-area: logo;
+  padding-top: 18px;
+  padding-left: 60px;
+}
+.logo h2 {
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  grid-area: nav;
+  padding-top: 20px;
+}
+nav ul li a {
+  padding-left: 35px;
+  padding-right: 35px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: bolder;
+  transition: all 0.3s;
+}
+nav ul li a:hover {
+  color: var(--accent-hover);
+  font-size: 23px;
+}
+.btn {
+  grid-area: btn;
+  margin-left: 50px;
+  display: flex;
+}
+.btn button {
+  margin-top: 10px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  padding-top: 11px;
+  margin-left: 20px;
+}
+
+.btn button a {
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--btn-text);
+  background-color: var(--accent);
+  padding: 6px 20px;
+  border-radius: 15px;
+
+  transition: all 0.3s;
+}
+.btn button a:hover {
+  background-color: var(--accent-hover);
+  font-size: 23px;
+}
+.logo {
+  grid-area: Logo;
+}
+nav {
+  grid-area: nav;
+}
+
+/*______________________________________________________________________________________________________________________________*/
+.search {
+  width: 400px;
+  height: 30px;
+  margin-top: 20px;
+  grid-area: search;
+  border-radius: 14px;
+  margin: auto;
+  transition: all 0.3s ease;
+  background-color: var(--input-bg);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.search:focus {
+  width: 430px;
+  outline: none;
+  border-color: var(--accent);
+}
+.hero {
+  grid-area: hero;
+  background-image: url(../banner-image.png);
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: 0 2px 20px 2px;
+}
+.hero .hero-content {
+  z-index: 2;
+  padding-left: 20px;
+}
+.hero .hero-content h1 {
+  font-weight: bold;
+  font-size: 35px;
+}
+.hero .hero-content p {
+  font-size: 18px;
+  font-weight: bolder;
+  padding-left: 18px;
+}
+.hero .hero-content button {
+  border: none;
+  background-color: transparent;
+  height: 30px;
+  width: auto;
+  padding-top: 11px;
+}
+.hero .hero-content a {
+  border-radius: 15px;
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--btn-text);
+  background-color: var(--accent);
+  transition: all 0.3s;
+  padding: 6px 20px;
+}
+.hero .hero-content a:hover {
+  background-color: var(--accent-hover);
+  font-size: 23px;
+}
+
+.content {
+  grid-area: sec;
+  display: grid;
+  grid-template-areas: "prod prod prod";
+  grid-template-columns: 350px auto;
+}
+.various-products {
+  grid-area: prod;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  padding: 20px 40px 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.various-products .card {
+  width: auto;
+  height: auto;
+  max-width: 350px;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: var(--surface);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+}
+.various-products .card:hover {
+  z-index: 10;
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
+}
+.various-products .card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+}
+.card .name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  color: var(--text);
+}
+.card .rating {
+  width: 80%;
+  padding: 5px 5px 5px 0px;
+  font-weight: bolder;
+  color: var(--muted);
+}
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+.card .details .price {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 14px;
+  color: var(--accent);
+}
+.card .details .price span {
+  padding-left: 2px;
+}
+.card .details .add-to-cart {
+  font-weight: bolder;
+  font-size: 16px;
+  color: var(--btn-text);
+  background-color: var(--accent);
+  padding: 6px 20px;
+  border: none;
+  transition: all 0.3s;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+.card .details .add-to-cart:hover {
+  background-color: var(--accent-hover);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.foot {
+  grid-area: foot;
+  height: 100%;
+  width: 100%;
+  background-color: var(--surface);
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto auto auto;
+  grid-template-areas: "logo social final";
+}
+.foot .footer-top {
+  grid-area: logo;
+  padding-left: 7px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.foot .footer-top p a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: bold;
+  font-size: 20px;
+}
+.foot .footer-top span {
+  display: block;
+  font-weight: bolder;
+  color: var(--text);
+  margin-top: 5px;
+}
+
+.foot .socials {
+  grid-area: social;
+
+  margin: auto;
+}
+.foot .socials i {
+  padding-top: 6px;
+  margin-right: 10px;
+  color: var(--text);
+  font-size: 20px;
+}
+
+.foot .footer-divider {
+  grid-area: final;
+  /* margin-top: auto;
+    margin-bottom: auto; */
+  margin: auto;
+}
+.foot .footer-divider p {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text);
+}
